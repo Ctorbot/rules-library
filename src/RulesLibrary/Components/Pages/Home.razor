@@ -1,0 +1,38 @@
+﻿@page "/"
+@using System.Net.Http.Json
+@using Microsoft.AspNetCore.Components
+
+<h3>PDF List</h3>
+<ul>
+    @if (pdfList != null)
+    {
+        foreach (var pdf in pdfList)
+        {
+            <li><a href="@pdf.url" target="_blank">@pdf.name</a></li>
+        }
+    }
+    else
+    {
+        <p>Loading...</p>
+    }
+</ul>
+
+@code {
+    [Inject]
+    public NavigationManager MyNavigationManager { get; set; } = default!;
+
+    public class PdfFile
+    {
+        public string name { get; set; }
+        public string url { get; set; }
+    }
+
+    private List<PdfFile> pdfList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var httpClient = new HttpClient();
+        string json = await httpClient.GetStringAsync($"{MyNavigationManager.BaseUri}rules.json"); // Use relative path
+        pdfList = System.Text.Json.JsonSerializer.Deserialize<List<PdfFile>>(json);
+    }
+}

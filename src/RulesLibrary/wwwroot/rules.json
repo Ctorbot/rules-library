@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Document 1",
+        "url": "https://example.com/docs/doc1.pdf"
+    },
+    {
+        "name": "Document 2",
+        "url": "https://example.com/docs/doc2.pdf"
+    },
+    {
+        "name": "Document 3",
+        "url": "https://example.com/docs/doc3.pdf"
+    }
+]
